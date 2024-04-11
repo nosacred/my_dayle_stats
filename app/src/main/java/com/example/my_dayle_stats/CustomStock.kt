@@ -15,5 +15,4 @@ data class CustomStock(
     val price: Double,
     val discount: Int,
     val werehouseArray: Set<String>
-){
-}
+)

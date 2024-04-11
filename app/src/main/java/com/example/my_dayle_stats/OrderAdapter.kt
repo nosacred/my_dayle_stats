@@ -25,22 +25,23 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class OrderAdapter(
-    private val onItemClicked:(position: Int) ->Unit,
+    private val onItemClicked: (position: Int) -> Unit,
     val ordersToday: List<Order>,
-    val ordersAll : List<Order>
-):RecyclerView.Adapter<OrderAdapter.Holder>() {
+    val ordersAll: List<Order>
+) : RecyclerView.Adapter<OrderAdapter.Holder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
 
-        return Holder(parent.inflate(R.layout.items_orders),
-            onItemClicked)
+        return Holder(
+            parent.inflate(R.layout.items_orders),
+            onItemClicked
+        )
     }
 
     override fun getItemCount(): Int {
         return ordersToday.size
     }
-
 
 
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
@@ -67,7 +68,7 @@ class OrderAdapter(
         private val yesterDayOrderView: TextView = view.findViewById(R.id.yesterdayOrders)
         private val sevenDaysOrderView: TextView = view.findViewById(R.id.sevenDaysOrders)
         private val monthOrdersView: TextView = view.findViewById(R.id.monthOrders)
-        private val graph:BarChart = view.findViewById(R.id.graph)
+        private val graph: BarChart = view.findViewById(R.id.graph)
 
         init {
             view.setOnClickListener {
@@ -84,18 +85,23 @@ class OrderAdapter(
                 .withMinute(0)
                 .withSecond(0)
 
-            dopItemLiner.visibility=View.GONE
+            dopItemLiner.visibility = View.GONE
 
-            val ordersMinus1day = allOrders.filter { it.barcode == order.barcode }.filter { it.date.dayOfYear == LocalDateTime.now().minusDays(1).dayOfYear }
-            val weekOrders = allOrders.filter { it.barcode.equals(order.barcode) }.
-            filter { it.date.isAfter( zdt.minusDays(7))}
+            val ordersMinus1day = allOrders.filter { it.barcode == order.barcode }
+                .filter { it.date.dayOfYear == LocalDateTime.now().minusDays(1).dayOfYear }
+            val weekOrders = allOrders.filter { it.barcode.equals(order.barcode) }
+                .filter { it.date.isAfter(zdt.minusDays(7)) }
 
-            val monthOrders = allOrders.filter { it.barcode.equals(order.barcode) }.
-            filter { it.date.isAfter( zdt.minusDays(30))}
+            val monthOrders = allOrders.filter { it.barcode.equals(order.barcode) }
+                .filter { it.date.isAfter(zdt.minusDays(30)) }
             val formatter = DateTimeFormatter.ofPattern("HH:MM dd MMMM yyyy")
 
             dateTextView.text =
-                "Заказ №${ordersToday.size - ordersToday.indexOf(order)} от ${order.date.format(formatter)} "
+                "Заказ №${ordersToday.size - ordersToday.indexOf(order)} от ${
+                    order.date.format(
+                        formatter
+                    )
+                } "
             brandTextView.text = "${order.brand} | ${order.nmId}"
             categorySubjectTextView.text = "Предмет: ${order.subject}"
             sizeTextView.text = "Размер: ${order.techSize}\nАрт.:${order.supplierArticle}"
@@ -125,48 +131,63 @@ class OrderAdapter(
                 dateTextView.setBackgroundColor(Color.parseColor("#E66761"))
             } else dateTextView.setBackgroundColor(Color.parseColor("#7CB342"))
 
-            val yestDayOrderSum = ordersMinus1day.stream().mapToInt { it.finishedPrice.toInt() }.sum()
+            val yestDayOrderSum =
+                ordersMinus1day.stream().mapToInt { it.finishedPrice.toInt() }.sum()
             val sevenDayOrderSum = weekOrders.stream().mapToInt { it.finishedPrice.toInt() }.sum()
             val monthOrderSum = monthOrders.stream().mapToInt { it.finishedPrice.toInt() }.sum()
-            yesterDayOrderView.text = "За Вчера заказано ${ordersMinus1day.size} шт на ${String.format(
-                Locale.CANADA_FRENCH,"%,d",yestDayOrderSum)} руб"
-            sevenDaysOrderView.text = "За 7 дней заказано ${weekOrders.size} шт на ${String.format(Locale.CANADA_FRENCH,"%,d",sevenDayOrderSum)} руб"
-            monthOrdersView.text = "За 30 дней заказано ${monthOrders.size} шт на ${String.format(Locale.CANADA_FRENCH,"%,d",monthOrderSum)} руб"
+            yesterDayOrderView.text = "За Вчера заказано ${ordersMinus1day.size} шт на ${
+                String.format(
+                    Locale.CANADA_FRENCH, "%,d", yestDayOrderSum
+                )
+            } руб"
+            sevenDaysOrderView.text = "За 7 дней заказано ${weekOrders.size} шт на ${
+                String.format(
+                    Locale.CANADA_FRENCH,
+                    "%,d",
+                    sevenDayOrderSum
+                )
+            } руб"
+            monthOrdersView.text = "За 30 дней заказано ${monthOrders.size} шт на ${
+                String.format(
+                    Locale.CANADA_FRENCH,
+                    "%,d",
+                    monthOrderSum
+                )
+            } руб"
 
             var ldt = ZonedDateTime.now(ZoneId.systemDefault()).minusDays(7)
 
 
-
             val arrayDataPoint = ArrayList<BarEntry>()
             val arrayCancelDataPoint = ArrayList<BarEntry>()
-            graph.xAxis.valueFormatter=LineChartXAxisValueFormatter()
-            graph.xAxis.position=XAxis.XAxisPosition.BOTTOM
+            graph.xAxis.valueFormatter = LineChartXAxisValueFormatter()
+            graph.xAxis.position = XAxis.XAxisPosition.BOTTOM
 
-            while(ldt.dayOfYear <= LocalDateTime.now(ZoneId.systemDefault()).dayOfYear ){
+            while (ldt.dayOfYear <= LocalDateTime.now(ZoneId.systemDefault()).dayOfYear) {
                 val count = allOrders.filter { it.barcode == order.barcode }
                     .count { it.date.dayOfYear == ldt.dayOfYear }
-                val dbl = TimeUnit.SECONDS.toDays( ldt.toInstant().epochSecond)
+                val dbl = TimeUnit.SECONDS.toDays(ldt.toInstant().epochSecond)
 
                 val cancelCount = allOrders.filter { it.barcode == order.barcode }
                     .filter { it.date.dayOfYear == ldt.dayOfYear }.count { it.isCancel }
-                val dataPoint = BarEntry(dbl.toFloat(),count.toFloat())
-                val cancelDataPoint = BarEntry(dbl.toFloat(),cancelCount.toFloat())
+                val dataPoint = BarEntry(dbl.toFloat(), count.toFloat())
+                val cancelDataPoint = BarEntry(dbl.toFloat(), cancelCount.toFloat())
                 arrayDataPoint.add(dataPoint)
                 arrayCancelDataPoint.add(cancelDataPoint)
-                ldt =ldt.plusDays(1)
+                ldt = ldt.plusDays(1)
             }
 
-            val dataset = BarDataSet(arrayDataPoint.toMutableList(),"Заказы")
-            val dataset2 = BarDataSet(arrayCancelDataPoint.toMutableList(),"Отмены")
-            dataset.setColor(Color.GREEN)
-            dataset2.setColor(Color.RED)
+            val dataset = BarDataSet(arrayDataPoint.toMutableList(), "Заказы")
+            val dataset2 = BarDataSet(arrayCancelDataPoint.toMutableList(), "Отмены")
+            dataset.color = Color.GREEN
+            dataset2.color = Color.RED
 
-            val datasets= ArrayList<IBarDataSet>()
+            val datasets = ArrayList<IBarDataSet>()
             datasets.add(dataset)
             datasets.add(dataset2)
 
-            val data =BarData(datasets)
-            graph.data=data
+            val data = BarData(datasets)
+            graph.data = data
             graph.invalidate()
             graph.animateY(500)
 

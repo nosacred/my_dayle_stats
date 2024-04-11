@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">My Daily Stats</string>
+    <string name="api_key">API_KEY</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="data_fragment_str">Для начала работы нажмите на кнопку получить данные. \nВНИМАНИЕ!!! \nДанные можно обновлять не чаще, чем 1 раз в  минуту!</string>
     <string name="orders">Заказы</string>
@@ -102,4 +103,5 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="info_api">Приложение не будет иметь возможности добавлять/менять/удалять Ваши данные из ЛК кабинета поставщика! Оно лишь берет данные с сервера WB и предоставляет Вам их в удобочитаемом формате с возможностью аналитики данных за последние 30 дней</string>
 </resources>

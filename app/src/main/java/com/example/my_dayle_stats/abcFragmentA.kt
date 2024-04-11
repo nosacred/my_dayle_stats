@@ -3,23 +3,22 @@ package com.example.my_dayle_stats
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.time.LocalDateTime
 import java.util.Locale
 
 class abcFragmentA : Fragment() {
-lateinit var recycle: RecyclerView
-    private val dataModel : DataModel by activityViewModels()
-    lateinit var saleList:List<Sale>
+    lateinit var recycle: RecyclerView
+    private val dataModel: DataModel by activityViewModels()
+    lateinit var saleList: List<Sale>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +37,14 @@ lateinit var recycle: RecyclerView
             saleList = dataModel.salesVM.value.orEmpty()
             val abcList = getAbcAList(saleList)
             val sum = abcList.map { it.totalSaleForPay }.sum()
-            tv.text="Выкупили ${abcList.count()} артикулов на ${String.format(Locale.CANADA_FRENCH,"%,d",sum)} руб"
-            recycle=view.requireViewById(R.id.abc_recycleView)
+            tv.text = "Выкупили ${abcList.count()} артикулов на ${
+                String.format(
+                    Locale.CANADA_FRENCH,
+                    "%,d",
+                    sum
+                )
+            } руб"
+            recycle = view.requireViewById(R.id.abc_recycleView)
             recycle.adapter = AbcAdapter(abcList)
             recycle.layoutManager = LinearLayoutManager(this.context)
         }

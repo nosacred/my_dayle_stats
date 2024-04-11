@@ -1,12 +1,13 @@
 package com.example.my_dayle_stats
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ import java.time.format.DateTimeFormatter
 
 class GetDataFragment : Fragment() {
 
-    private val dataModel :DataModel by activityViewModels()
+    private val dataModel: DataModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,8 +36,9 @@ class GetDataFragment : Fragment() {
         val getStocksBtn = view.findViewById<Button>(R.id.getStocksButton)
 
         val date = LocalDate.now().minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE)
-        val apiKey =
-            "eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxNzU3NjE4NSwiaWQiOiIxMDMzNTczNS0wNTViLTQ3NWQtOGQ2OC1mMTA1ZDdkMWFkYTgiLCJpaWQiOjkxNDU0MTMsIm9pZCI6MTM1NTI3LCJzIjozMiwic2lkIjoiZTI2NWVlZmEtYjY1My00OTlkLThmMTYtMjAzYzJmNjMwNGQ1IiwidWlkIjo5MTQ1NDEzfQ.omZjk0y5UhP4lDTeY6CP47acpmQY6cD8QpPZRF7vJ0f1KfYz6JEo7ahEGKfVYF2DIFzqmMcc_Rro5RUrpN1YAw"
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val apiKey = sharedPref?.getString(getString(R.string.api_key), "No API KEY")
+
 
         getallBtn.setOnClickListener {
             buttonTimer60sec(getallBtn, getallBtn.text.toString())
@@ -46,49 +48,73 @@ class GetDataFragment : Fragment() {
 
             GlobalScope.launch {
                 try {
-                    allOrder = Networking.wbApi.searchOrders(date, apiKey).execute().body()!!
-                }catch (ex :NullPointerException){
-                    Toast.makeText(this@GetDataFragment.context, "Попробуйте позже", Toast.LENGTH_SHORT).show()
+                    allOrder = apiKey?.let { it1 ->
+                        Networking.wbApi.searchOrders(date, it1).execute().body()
+                    }!!
+                } catch (ex: NullPointerException) {
+                    Toast.makeText(
+                        this@GetDataFragment.context,
+                        "Попробуйте позже",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 dataModel.ordersVM.postValue(allOrder)
 
-                salesToday = Networking.wbApi.searchSales(date, apiKey).execute().body()!!
+                salesToday = apiKey?.let { it1 ->
+                    Networking.wbApi.searchSales(
+                        date,
+                        it1
+                    ).execute().body()
+                }!!
                 dataModel.salesVM.postValue(salesToday)
 
 
-                stocksToday = Networking.wbApi.searchStocks(LocalDate.now().minusDays(10).toString(), apiKey)
-                    .execute().body()!!
+                stocksToday =
+                    Networking.wbApi.searchStocks(LocalDate.now().minusDays(10).toString(), apiKey)
+                        .execute().body()!!
                 dataModel.stocksVM.postValue(stocksToday)
 
             }
-//            findNavController().navigate(R.id.action_upDateFragment_to_tabFragment)
+
         }
 
         getOrdersbtn.setOnClickListener {
-            buttonTimer60sec(getOrdersbtn,getOrdersbtn.text.toString())
+            buttonTimer60sec(getOrdersbtn, getOrdersbtn.text.toString())
             buttonTimer60sec(getallBtn, getallBtn.text.toString())
             GlobalScope.launch {
-                allOrder = Networking.wbApi.searchOrders(date, apiKey).execute().body()!!
+                allOrder = apiKey?.let { it1 ->
+                    Networking.wbApi.searchOrders(
+                        date,
+                        it1
+                    ).execute().body()
+                }!!
                 dataModel.ordersVM.postValue(allOrder)
             }
         }
 
         getSalesBtn.setOnClickListener {
-            buttonTimer60sec(getSalesBtn,getSalesBtn.text.toString())
+            buttonTimer60sec(getSalesBtn, getSalesBtn.text.toString())
             buttonTimer60sec(getallBtn, getallBtn.text.toString())
             GlobalScope.launch {
-                salesToday = Networking.wbApi.searchSales(date, apiKey).execute().body()!!
+                salesToday = apiKey?.let { it1 ->
+                    Networking.wbApi.searchSales(
+                        date,
+                        it1
+                    ).execute().body()
+                }!!
                 dataModel.salesVM.postValue(salesToday)
             }
         }
         getStocksBtn.setOnClickListener {
-            buttonTimer60sec(getStocksBtn,getStocksBtn.text.toString())
+            buttonTimer60sec(getStocksBtn, getStocksBtn.text.toString())
             buttonTimer60sec(getallBtn, getallBtn.text.toString())
             GlobalScope.launch {
                 stocksToday =
-                    Networking.wbApi.searchStocks(LocalDate.now().minusDays(10).toString(), apiKey)
-                        .execute().body()!!
+                    apiKey?.let { it1 ->
+                        Networking.wbApi.searchStocks(LocalDate.now().minusDays(10).toString(), it1)
+                            .execute().body()
+                    }!!
                 dataModel.stocksVM.postValue(stocksToday)
             }
         }

@@ -3,13 +3,13 @@ package com.example.my_dayle_stats
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,9 +21,9 @@ import java.util.Locale
 @SuppressLint("NotifyDataSetChanged")
 class OrderFragment : Fragment(R.layout.fragment_order) {
     var orderList = emptyList<Order>()
-    private val dataModel : DataModel by activityViewModels()
-    private lateinit var recycle : RecyclerView
-    private lateinit var tv : TextView
+    private val dataModel: DataModel by activityViewModels()
+    private lateinit var recycle: RecyclerView
+    private lateinit var tv: TextView
 
 
     override fun onCreateView(
@@ -43,9 +43,10 @@ class OrderFragment : Fragment(R.layout.fragment_order) {
         dataModel.ordersVM.observe(activity as LifecycleOwner) {
             tv = view.requireViewById(R.id.infoOrdersTV)
             orderList = dataModel.ordersVM.value.orEmpty()
-            tv.text = setOrdersInfo(orderList.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear })
+            tv.text =
+                setOrdersInfo(orderList.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear })
 
-            recycle.adapter = OrderAdapter({position->showDopOrderViews(position) },
+            recycle.adapter = OrderAdapter({ position -> showDopOrderViews(position) },
                 orderList.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear }
                     .sortedBy { it.date }.reversed(),
                 orderList
@@ -60,34 +61,40 @@ class OrderFragment : Fragment(R.layout.fragment_order) {
 
 
     @RequiresApi(Build.VERSION_CODES.P)
-    private fun showDopOrderViews(position :Int){
+    private fun showDopOrderViews(position: Int) {
         val view1 = view?.requireViewById<RecyclerView>(R.id.orderRecycleView)
-        val dopView = view1?.findViewHolderForAdapterPosition(position)?.itemView?.
-        findViewById<LinearLayout>(R.id.dropDownStats)
+        val dopView =
+            view1?.findViewHolderForAdapterPosition(position)?.itemView?.findViewById<LinearLayout>(
+                R.id.dropDownStats
+            )
 
-        if(dopView?.visibility ==View.GONE){
-            dopView.visibility=View.VISIBLE
-            view1.scrollTo(0,dopView.bottom)
+        if (dopView?.visibility == View.GONE) {
+            dopView.visibility = View.VISIBLE
+            view1.scrollTo(0, dopView.bottom)
         } else {
             dopView?.visibility = View.GONE
         }
     }
 
-    private fun setOrdersInfo(orders: List<Order>) : String{
+    private fun setOrdersInfo(orders: List<Order>): String {
         var sum = 0.0
-        for(order: Order in orders){
-            if(!order.isCancel)
+        for (order: Order in orders) {
+            if (!order.isCancel)
                 sum += order.priceWithDisc
         }
-        return "Заказов: ${orders.size - orders.filter { order ->order.isCancel }.count()}шт на ${String.format(
-            Locale.CANADA_FRENCH,"%,d",sum.toInt())} руб \nОтказов: ${orders.filter { order ->order.isCancel }.count()}шт"
+        return "Заказов: ${orders.size - orders.filter { order -> order.isCancel }.count()}шт на ${
+            String.format(
+                Locale.CANADA_FRENCH, "%,d", sum.toInt()
+            )
+        } руб \nОтказов: ${orders.filter { order -> order.isCancel }.count()}шт"
     }
 
 
     @RequiresApi(Build.VERSION_CODES.P)
-    fun upDate(listOrder: List<Order>){
-        recycle.adapter = OrderAdapter({position->showDopOrderViews(position) },
-            listOrder.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear }.sortedBy { it.date }.reversed(),
+    fun upDate(listOrder: List<Order>) {
+        recycle.adapter = OrderAdapter({ position -> showDopOrderViews(position) },
+            listOrder.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear }
+                .sortedBy { it.date }.reversed(),
             orderList
         )
         recycle.layoutManager = LinearLayoutManager(this.context)
@@ -98,7 +105,7 @@ class OrderFragment : Fragment(R.layout.fragment_order) {
 
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance()= OrderFragment()
+        fun newInstance() = OrderFragment()
 
     }
 

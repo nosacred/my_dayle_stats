@@ -1,32 +1,18 @@
 package com.example.my_dayle_stats
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
-import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.android_wb.SaleFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class TabFragment : Fragment(R.layout.fragment_tab) {
 
@@ -38,7 +24,7 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
         saleFragment,
         stockFragment
     )
-    private val dataModel :DataModel by activityViewModels()
+    private val dataModel: DataModel by activityViewModels()
 
     lateinit var tabLayout: TabLayout
     override fun onCreateView(
@@ -51,11 +37,7 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        tabLayout=view.requireViewById(R.id.tabContainer)
-        val date = LocalDate.now().minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE)
-        val apiKey =
-            "eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxNzU3NjE4NSwiaWQiOiIxMDMzNTczNS0wNTViLTQ3NWQtOGQ2OC1mMTA1ZDdkMWFkYTgiLCJpaWQiOjkxNDU0MTMsIm9pZCI6MTM1NTI3LCJzIjozMiwic2lkIjoiZTI2NWVlZmEtYjY1My00OTlkLThmMTYtMjAzYzJmNjMwNGQ1IiwidWlkIjo5MTQ1NDEzfQ.omZjk0y5UhP4lDTeY6CP47acpmQY6cD8QpPZRF7vJ0f1KfYz6JEo7ahEGKfVYF2DIFzqmMcc_Rro5RUrpN1YAw"
-
+        tabLayout = view.requireViewById(R.id.tabContainer)
 
         dataModel.ordersVM.observe(viewLifecycleOwner) {
             val bg = tabLayout.getTabAt(0)?.orCreateBadge
@@ -68,7 +50,9 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
         dataModel.salesVM.observe(viewLifecycleOwner) {
             val bg = tabLayout.getTabAt(1)?.orCreateBadge
             if (bg != null) {
-                bg.number = it.filter { sale -> sale.date.dayOfYear == LocalDateTime.now().dayOfYear}.count()
+                bg.number =
+                    it.filter { sale -> sale.date.dayOfYear == LocalDateTime.now().dayOfYear }
+                        .count()
             }
         }
         dataModel.stocksVM.observe(viewLifecycleOwner) { it ->
@@ -94,6 +78,7 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
 //                        )
 //                    }
                 }
+
                 1 -> {
                     tab.text = getText(R.string.sales)
 //                    tab.icon = this.context?.let {
@@ -103,6 +88,7 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
 //                        )
 //                    }
                 }
+
                 2 -> {
                     tab.text = getText(R.string.stocks)
 //                    tab.icon = this.context?.let {

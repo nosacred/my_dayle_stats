@@ -1,13 +1,14 @@
 package com.example.my_dayle_stats
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,8 +17,8 @@ import java.util.Locale
 
 class abcFragmentB : Fragment() {
     lateinit var recycle: RecyclerView
-    private val dataModel : DataModel by activityViewModels()
-    lateinit var saleList:List<Sale>
+    private val dataModel: DataModel by activityViewModels()
+    lateinit var saleList: List<Sale>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +28,7 @@ class abcFragmentB : Fragment() {
         return inflater.inflate(R.layout.fragment_abc_a, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val tv = view.requireViewById<TextView>(R.id.abcTextView)
@@ -35,8 +37,14 @@ class abcFragmentB : Fragment() {
             saleList = dataModel.salesVM.value.orEmpty()
             val abcList = getAbcBList(saleList)
             val sum = abcList.map { it.totalSaleForPay }.sum()
-            tv.text="Выкупили ${abcList.count()} артикулов на ${String.format(Locale.CANADA_FRENCH,"%,d",sum)} руб"
-            recycle=view.requireViewById(R.id.abc_recycleView)
+            tv.text = "Выкупили ${abcList.count()} артикулов на ${
+                String.format(
+                    Locale.CANADA_FRENCH,
+                    "%,d",
+                    sum
+                )
+            } руб"
+            recycle = view.requireViewById(R.id.abc_recycleView)
             recycle.adapter = AbcAdapter(abcList)
             recycle.layoutManager = LinearLayoutManager(this.context)
         }
