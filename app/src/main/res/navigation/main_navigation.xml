@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/upDateFragment">
+
+    <fragment
+        android:id="@+id/introAPI"
+        android:name="com.example.my_dayle_stats.IntroFragment"
+        android:label="Обновление данных"
+        tools:layout="@layout/fragment_info"/>
+    <fragment
+        android:id="@+id/upDateFragment"
+        android:name="com.example.my_dayle_stats.GetDataFragment"
+        android:label="Обновление даных"
+        tools:layout="@layout/fragment_get_data" >
+        <action
+            android:id="@+id/action_upDateFragment_to_tabFragment"
+            app:destination="@id/tabFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tabFragment"
+        android:name="com.example.my_dayle_stats.TabFragment"
+        android:label="Сегодня"
+        tools:layout="@layout/fragment_tab">
+        <action
+            android:id="@+id/action_tabFragment_to_upDateFragment"
+            app:destination="@id/upDateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/monthStatsFragment"
+        android:name="com.example.my_dayle_stats.MonthStatsFragment"
+        android:label="Статистика за месяц"
+        tools:layout="@layout/fragment_month_stats">
+        <action
+            android:id="@+id/action_monthStatsFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/wereHousesFragment"
+        android:name="com.example.my_dayle_stats.ABCFragment"
+        android:label="ABC анализ"
+        tools:layout="@layout/fragment_abc" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.my_dayle_stats.DetailFragment"
+        android:label="Статистика по арткулу за месяц"
+        tools:layout="@layout/fragment_detail"></fragment>
+</navigation>

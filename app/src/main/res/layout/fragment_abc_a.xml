@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".abcFragmentA">
+
+    <androidx.cardview.widget.CardView
+        style="@style/Widget.Material3.CardView.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:fontFamily="sans-serif"
+        android:id="@+id/abcTextView"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="Statistic"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+    </androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/abc_recycleView"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/items_abc"
+        android:layout_height="match_parent" />
+</LinearLayout>

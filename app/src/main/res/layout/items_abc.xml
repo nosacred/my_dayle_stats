@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/i_abc_imageVIew"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+        <TextView
+            android:layout_marginStart="8dp"
+        android:id="@+id/i_abc_arcticle_nmId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Article NMID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/i_abc_imageVIew"
+        app:layout_constraintTop_toTopOf="@id/i_abc_imageVIew" />
+
+    <TextView
+        android:id="@+id/i_abc_subject_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Category subj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/i_abc_imageVIew"
+        app:layout_constraintTop_toBottomOf="@id/i_abc_arcticle_nmId" />
+
+        <TextView
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/i_abc_subject_category"
+            app:layout_constraintStart_toEndOf="@+id/i_abc_imageVIew"
+            android:id="@+id/i_abc_bcode"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:text="barcode" />
+
+        <TextView
+            android:layout_marginStart="8dp"
+            android:id="@+id/i_abc_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/i_abc_bcode"
+            app:layout_constraintStart_toEndOf="@+id/i_abc_imageVIew"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="size" />
+
+
+        <TextView
+            android:layout_marginStart="8dp"
+            android:id="@+id/i_abc_count_sale"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/i_abc_imageVIew"
+            app:layout_constraintTop_toBottomOf="@id/i_abc_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Выкупили шт на сумму" />
+
+        <TextView
+            android:layout_marginStart="8dp"
+            android:id="@+id/i_abc_count_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/i_abc_count_sale"
+            app:layout_constraintStart_toEndOf="@+id/i_abc_imageVIew"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Возвратов шт на сумму" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

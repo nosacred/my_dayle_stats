@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+
+    tools:context=".OrderFragment">
+
+
+    <TextView
+
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"
+        android:elevation="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/infoOrdersTV"
+        android:textAppearance="@android:style/TextAppearance.Material.Title"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/infoOrdersTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/orderRecycleView"
+        tools:itemCount="10"
+        tools:listitem="@layout/items_orders"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabScrollDownOrders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_arrow_circle_up"
+        app:fabSize="mini"
+        app:tint="#FFFFFF" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

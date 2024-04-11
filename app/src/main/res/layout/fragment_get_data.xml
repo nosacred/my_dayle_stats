@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".GetDataFragment">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textView3"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="40dp"
+                android:includeFontPadding="false"
+                android:text="@string/data_fragment_str"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textStyle="bold"
+                app:fontFamily="@font/wellfleet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/getAllDataBtn"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/get_allData"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/getOrdersButton"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/get_stocks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/getAllDataBtn" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/getSalesButton"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/get_sales"
+                app:layout_constraintEnd_toEndOf="@+id/getOrdersButton"
+                app:layout_constraintStart_toStartOf="@+id/getOrdersButton"
+                app:layout_constraintTop_toBottomOf="@+id/getOrdersButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/getStocksButton"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/get_stocks"
+                app:layout_constraintEnd_toEndOf="@+id/getSalesButton"
+                app:layout_constraintStart_toStartOf="@+id/getSalesButton"
+                app:layout_constraintTop_toBottomOf="@+id/getSalesButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <item
+        android:id="@+id/tabFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:iconTint="@color/white"
+        android:icon="@drawable/ic_calendar_today"
+        android:title="Сегодня" />
+    <item
+        android:id="@+id/monthStatsFragment"
+        android:iconTint="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_calendar_month"
+        android:title="Месяц" />
+    <item
+        android:id="@+id/wereHousesFragment"
+        android:iconTint="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_abc"
+        android:title="ABC" />
+    <item
+        android:id="@+id/upDateFragment"
+        android:iconTint="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_replay_24"
+        android:title="Обновить" />
+</menu>

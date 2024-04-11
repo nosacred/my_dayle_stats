@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/md_theme_dark_outline"
+        app:cardElevation="0dp"
+        style="?attr/materialCardViewFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        android:layout_marginTop="6dp"
+        android:id="@+id/imageOrder"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTxtView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:padding="4dp"
+        android:id="@+id/dateTxtView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        app:layout_constraintBottom_toTopOf="@+id/brandView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:text="datetime" />
+
+    <TextView
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:id="@+id/brandView"
+        android:layout_marginStart="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/categorySubjectView"
+        app:layout_constraintStart_toEndOf="@+id/imageOrder"
+        app:layout_constraintTop_toBottomOf="@+id/dateTxtView"
+        tools:text="Brand" />
+
+    <TextView
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:id="@+id/categorySubjectView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/sizeView"
+        app:layout_constraintStart_toStartOf="@+id/brandView"
+        app:layout_constraintTop_toBottomOf="@+id/brandView"
+        tools:text="Категория:  ываыва ; Предмет: ваыпвап" />
+
+    <TextView
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:id="@+id/sizeView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/wereHouseView"
+        app:layout_constraintStart_toStartOf="@+id/brandView"
+        app:layout_constraintTop_toBottomOf="@+id/categorySubjectView"
+        tools:text="РАЗМЕР : " />
+
+    <TextView
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:id="@+id/wereHouseView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/costView"
+        app:layout_constraintStart_toStartOf="@+id/brandView"
+        app:layout_constraintTop_toBottomOf="@+id/sizeView"
+        tools:text="Склад - РЕГИОН" />
+
+    <TextView
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:id="@+id/costView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/totalOrdersToday"
+        app:layout_constraintStart_toStartOf="@+id/brandView"
+        app:layout_constraintTop_toBottomOf="@+id/wereHouseView"
+        tools:text="Cумма заказа" />
+
+    <TextView
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:id="@+id/totalOrdersToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/brandView"
+        app:layout_constraintTop_toBottomOf="@+id/costView"
+        tools:text="Сегодня таких Н штук на сумму 100500рублей" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalOrdersToday"
+        android:id="@+id/dropDownStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:id="@+id/yesterdayOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:id="@+id/sevenDaysOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:id="@+id/monthOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:paddingTop="10dp"
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
