@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit
 
 class LineChartXAxisValueFormatter : IndexAxisValueFormatter() {
     override fun getFormattedValue(value: Float): String {
-        val emissionsMilliSince1970Time = TimeUnit.DAYS.toMillis(value.toLong())
+        //+ 1 день для високосного года!!!
+        val emissionsMilliSince1970Time = TimeUnit.DAYS.toMillis(value.toLong())+TimeUnit.DAYS.toMillis(1)
 
         val timeMilliseconds = Date(emissionsMilliSince1970Time)
         val dateTimeFormat = SimpleDateFormat("dd MMM")

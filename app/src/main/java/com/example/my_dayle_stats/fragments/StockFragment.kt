@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -8,13 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.my_dayle_stats.CustomStock
+import com.example.my_dayle_stats.adapters.CustomStocksAdapter
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.Stock
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class StockFragment : Fragment(R.layout.fragment_stock) {
@@ -59,7 +61,7 @@ class StockFragment : Fragment(R.layout.fragment_stock) {
         val customStocks = ArrayList<CustomStock>()
 
         val bcodesHs = HashSet<String>()
-        for(s :Stock in stocks){
+        for(s : Stock in stocks){
             bcodesHs.add(s.barcode)
         }
 
@@ -93,7 +95,7 @@ class StockFragment : Fragment(R.layout.fragment_stock) {
 
     @SuppressLint("NotifyDataSetChanged")
     fun upDate(listStock : List<Stock>){
-        recyclerView.adapter=CustomStocksAdapter( { position -> showDopStocksViews(position)  },makeCustomStocks(listStock),stocks)
+        recyclerView.adapter= CustomStocksAdapter( { position -> showDopStocksViews(position)  },makeCustomStocks(listStock),stocks)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
     }
 

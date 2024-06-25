@@ -1,4 +1,4 @@
-package com.example.android_wb
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.my_dayle_stats.DataModel
 import com.example.my_dayle_stats.R
 import com.example.my_dayle_stats.Sale
-import com.example.my_dayle_stats.SaleAdapter
+import com.example.my_dayle_stats.adapters.SaleAdapter
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDateTime

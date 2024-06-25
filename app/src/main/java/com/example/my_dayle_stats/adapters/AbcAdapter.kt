@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.adapters
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -8,6 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.my_dayle_stats.AbClass
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.articleLink
 import com.squareup.picasso.Picasso
 
 class AbcAdapter(private val abc_item: List<AbClass>) : RecyclerView.Adapter<AbcAdapter.Holder>() {

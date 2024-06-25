@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.VPadapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -46,32 +48,32 @@ class ABCFragment : Fragment() {
             when (pos) {
                 0 -> {
                     tab.text = "A"
-                    tab.icon = this.context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.ic_orders
-                        )
-                    }
+//                    tab.icon = this.context?.let {
+//                        ContextCompat.getDrawable(
+//                            it,
+//                            R.drawable.ic_orders
+//                        )
+//                    }
                 }
 
                 1 -> {
                     tab.text = "B"
-                    tab.icon = this.context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.ic_sales
-                        )
-                    }
+//                    tab.icon = this.context?.let {
+//                        ContextCompat.getDrawable(
+//                            it,
+//                            R.drawable.ic_sales
+//                        )
+//                    }
                 }
 
                 2 -> {
                     tab.text = "C"
-                    tab.icon = this.context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.ic_stocks
-                        )
-                    }
+//                    tab.icon = this.context?.let {
+//                        ContextCompat.getDrawable(
+//                            it,
+//                            R.drawable.ic_stocks
+//                        )
+//                    }
                 }
             }
         }.attach()

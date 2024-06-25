@@ -1,5 +1,6 @@
 package com.example.my_dayle_stats
 
+import com.example.my_dayle_stats.adapters.ZonnedDateTimeAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

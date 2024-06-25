@@ -1,13 +1,9 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.text.method.MovementMethod
-import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +15,10 @@ import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.fromHtml
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.ValueFormatterPieChart
+import com.example.my_dayle_stats.articleLink
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData

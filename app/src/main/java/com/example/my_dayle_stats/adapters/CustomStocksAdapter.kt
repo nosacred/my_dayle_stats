@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -13,6 +13,10 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.my_dayle_stats.CustomStock
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.Stock
+import com.example.my_dayle_stats.articleLink
 import com.squareup.picasso.Picasso
 
 class CustomStocksAdapter(
@@ -91,7 +95,9 @@ class CustomStocksAdapter(
                 parentContainer.layoutParams=LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
                 parentContainer.orientation=LinearLayout.VERTICAL
                 if(count%2==0){
-                    parentContainer.setBackgroundColor( ContextCompat.getColor(stocksConteiner.context,R.color.md_theme_light_onSecondary))
+                    parentContainer.setBackgroundColor( ContextCompat.getColor(stocksConteiner.context,
+                        R.color.md_theme_light_onSecondary
+                    ))
                 }
                 parentContainer.setPadding(0,10,0,10)
 
@@ -138,14 +144,14 @@ class CustomStocksAdapter(
                     whTxT.setTextColor(Color.RED)
                     quantityTV.setTextColor(Color.RED)
                 }
-                if (qntity in 1..10){
-                    whTxT.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_light_onError))
-                    quantityTV.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_light_onError))
-                }
-                if (qntity>=40){
-                    whTxT.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_dark_onTertiary))
-                    quantityTV.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_dark_onTertiary))
-                }
+//                if (qntity in 1..10){
+//                    whTxT.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_light_onError))
+//                    quantityTV.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_light_onError))
+//                }
+//                if (qntity>=40){
+//                    whTxT.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_dark_onTertiary))
+//                    quantityTV.setTextColor(ContextCompat.getColor(parentContainer.context,R.color.md_theme_dark_onTertiary))
+//                }
 
                 whTxT.text = str
                 quantityTV.text = "Доступно \n$qntity шт"

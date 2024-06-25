@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.adapters
 
 import android.os.Build
 import androidx.annotation.RequiresApi

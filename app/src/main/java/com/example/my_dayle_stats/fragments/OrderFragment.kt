@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -14,6 +14,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.Order
+import com.example.my_dayle_stats.adapters.OrderAdapter
+import com.example.my_dayle_stats.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.LocalDateTime
 import java.util.Locale
@@ -44,7 +48,8 @@ class OrderFragment : Fragment(R.layout.fragment_order) {
             tv = view.requireViewById(R.id.infoOrdersTV)
             orderList = dataModel.ordersVM.value.orEmpty()
             tv.text =
-                setOrdersInfo(orderList.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear })
+                setOrdersInfo(orderList.filter { o-> o.date.dayOfMonth == LocalDateTime.now().dayOfMonth }
+                    .filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear })
 
             recycle.adapter = OrderAdapter({ position -> showDopOrderViews(position) },
                 orderList.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear }
@@ -94,6 +99,7 @@ class OrderFragment : Fragment(R.layout.fragment_order) {
     fun upDate(listOrder: List<Order>) {
         recycle.adapter = OrderAdapter({ position -> showDopOrderViews(position) },
             listOrder.filter { o -> o.date.dayOfYear == LocalDateTime.now().dayOfYear }
+                .filter { o-> o.date.dayOfMonth == LocalDateTime.now().dayOfMonth }
                 .sortedBy { it.date }.reversed(),
             orderList
         )

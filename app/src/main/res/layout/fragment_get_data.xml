@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".GetDataFragment">
+    tools:context=".fragments.GetDataFragment">
 
 
 
@@ -27,7 +27,6 @@
                 android:textAppearance="?attr/textAppearanceTitleLarge"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textStyle="bold"
-                app:fontFamily="@font/wellfleet"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

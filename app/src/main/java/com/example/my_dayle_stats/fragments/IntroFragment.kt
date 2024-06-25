@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context.MODE_PRIVATE
@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.example.my_dayle_stats.R
 
 
 class IntroFragment : Fragment() {

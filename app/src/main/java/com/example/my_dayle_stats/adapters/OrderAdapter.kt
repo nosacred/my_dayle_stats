@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -10,6 +10,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.my_dayle_stats.LineChartXAxisValueFormatter
+import com.example.my_dayle_stats.Order
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.articleLink
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -90,7 +94,7 @@ class OrderAdapter(
             val ordersMinus1day = allOrders.filter { it.barcode == order.barcode }
                 .filter { it.date.dayOfYear == LocalDateTime.now().minusDays(1).dayOfYear }
             val weekOrders = allOrders.filter { it.barcode.equals(order.barcode) }
-                .filter { it.date.isAfter(zdt.minusDays(7)) }
+                .filter { it.date.isAfter(zdt.minusDays(6)) }
 
             val monthOrders = allOrders.filter { it.barcode.equals(order.barcode) }
                 .filter { it.date.isAfter(zdt.minusDays(30)) }
@@ -107,17 +111,17 @@ class OrderAdapter(
             sizeTextView.text = "Размер: ${order.techSize}\nАрт.:${order.supplierArticle}"
             werehouseTextView.text = "${order.warehouseName} -> ${order.regionName}"
             costTextView.text = order.priceWithDisc.toString() + " руб СПП:${order.spp}%"
-            totalOrderTodayTextView.text = "Сегодня заказано ${
+            var todayCount =
                 ordersToday.stream().filter { o -> o.barcode == order.barcode && !order.isCancel }
                     .count()
-            }шт на ${
+            var todaySum =
                 ordersToday.stream().filter { o -> o.barcode == order.barcode && !order.isCancel }
                     .mapToInt { it.finishedPrice.toInt() }.sum()
-            } руб \nОтменено ${
-                ordersToday.stream()
-                    .filter { o -> o.barcode == order.barcode && order.isCancel }
-                    .count()
-            }  штук(и)"
+            var todayCancelCount = ordersToday.stream()
+                .filter { o -> o.barcode == order.barcode && order.isCancel }
+                .count()
+            totalOrderTodayTextView.text = "Сегодня заказано $todayCount шт на $todaySum руб \n" +
+                    "Отменено $todayCancelCount штук(и)"
 //            orderID.text = order.srid
 //            orderID.textSize = 8f
 
@@ -135,7 +139,7 @@ class OrderAdapter(
                 ordersMinus1day.stream().mapToInt { it.finishedPrice.toInt() }.sum()
             val sevenDayOrderSum = weekOrders.stream().mapToInt { it.finishedPrice.toInt() }.sum()
             val monthOrderSum = monthOrders.stream().mapToInt { it.finishedPrice.toInt() }.sum()
-            yesterDayOrderView.text = "За Вчера заказано ${ordersMinus1day.size} шт на ${
+            yesterDayOrderView.text = "Вчера заказано ${ordersMinus1day.size} шт на ${
                 String.format(
                     Locale.CANADA_FRENCH, "%,d", yestDayOrderSum
                 )
@@ -155,7 +159,7 @@ class OrderAdapter(
                 )
             } руб"
 
-            var ldt = ZonedDateTime.now(ZoneId.systemDefault()).minusDays(7)
+            var ldt = ZonedDateTime.now(ZoneId.systemDefault()).minusDays(6)
 
 
             val arrayDataPoint = ArrayList<BarEntry>()
@@ -165,7 +169,7 @@ class OrderAdapter(
 
             while (ldt.dayOfYear <= LocalDateTime.now(ZoneId.systemDefault()).dayOfYear) {
                 val count = allOrders.filter { it.barcode == order.barcode }
-                    .count { it.date.dayOfYear == ldt.dayOfYear }
+                    .count { it.date.dayOfYear == ldt.dayOfYear && it.date.dayOfMonth == ldt.dayOfMonth }
                 val dbl = TimeUnit.SECONDS.toDays(ldt.toInstant().epochSecond)
 
                 val cancelCount = allOrders.filter { it.barcode == order.barcode }

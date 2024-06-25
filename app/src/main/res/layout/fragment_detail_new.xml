@@ -4,32 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailNewFragment">
+    android:layout_margin="8dp"
+    tools:context=".fragments.DetailNewFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
+        <ImageView
 
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/imageView2"
+            android:layout_width="153dp"
+            android:layout_height="162dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_corner"
+            android:cropToPadding="false"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="Name"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="12dp" />
 
-            <ImageView
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="64dp" />
 
-                android:id="@+id/imageView2"
-                android:layout_width="153dp"
-                android:layout_height="162dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/round_corner"
-                android:cropToPadding="false"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic" />
-        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

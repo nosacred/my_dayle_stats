@@ -1,20 +1,33 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
+import android.app.ActionBar.LayoutParams
 import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.adapters.MonthStatsAdapter
+import com.example.my_dayle_stats.Order
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.Sale
+import com.example.my_dayle_stats.Stock
+import com.example.my_dayle_stats.adapters.getCompostiteStatList
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.Locale
 
@@ -36,7 +49,7 @@ class MonthStatsFragment : Fragment() {
     }
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         tv = view.requireViewById(R.id.infoMonthStatsTV)
@@ -84,14 +97,37 @@ class MonthStatsFragment : Fragment() {
         val monthBackSaleMoney =
             saleList.filter { it.forPay < 0 }.map { it.forPay }.map { it.toInt() }.sum()
 
-        tv.text = "За месяц заказано: ${orderList.size}шт на ${
-            String.format(
-                Locale.CANADA_FRENCH,
-                "%,d",
-                monthOrderMoney
+        val monthCardView =
+            requireView().findViewById<com.google.android.material.card.MaterialCardView>(
+                R.id.monthCardView
             )
-        }руб\n" +
-                "из них отменено: ${orderList.filter { it.isCancel }.count()} шт \n" +
+        val monthImageButton = requireView().findViewById<ImageButton>(R.id.monthImageButton)
+        val layoutParams = monthCardView.layoutParams
+        val heightLP = monthCardView.height
+        Log.d("Base height", "${heightLP}")
+        monthImageButton.setOnClickListener {
+            if (monthCardView.layoutParams.height != LayoutParams.WRAP_CONTENT) {
+                monthCardView.layoutParams =
+                    layoutParams.apply { height = LayoutParams.WRAP_CONTENT }
+                monthImageButton.setImageDrawable(resources.getDrawable(R.drawable.ic_arrow_drop_up))
+                Log.d("height UP", "${monthCardView.height}")
+            } else {
+                monthCardView.layoutParams = layoutParams.apply { height = 110 }
+                Log.d("height DOWN", "${monthCardView.height}")
+                monthImageButton.setImageDrawable(resources.getDrawable(R.drawable.ic_arrow_drop_down))
+            }
+
+        }
+
+        tv.text = "За месяц заказано: ${orderList.size}шт\n" +
+                "на ${
+                    String.format(
+                        Locale.CANADA_FRENCH,
+                        "%,d",
+                        monthOrderMoney
+                    )
+                }руб\n" +
+                "из них отменено: <b>${orderList.filter { it.isCancel }.count()}</b> шт \n" +
                 "Выкупили ${saleList.size}шт на сумму: ${
                     String.format(
                         Locale.CANADA_FRENCH,
@@ -101,7 +137,8 @@ class MonthStatsFragment : Fragment() {
                 } руб \n" +
                 "Возвращено товаров: ${
                     saleList.filter { it.forPay < 0 }.count()
-                }шт на сумму: ${String.format(Locale.CANADA_FRENCH, "%,d", monthBackSaleMoney)} руб"
+                }шт\n" +
+                "на сумму: ${String.format(Locale.CANADA_FRENCH, "%,d", monthBackSaleMoney)} руб"
 
 
         fab.setOnClickListener {

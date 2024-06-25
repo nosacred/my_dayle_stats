@@ -49,7 +49,6 @@
         tools:text="datetime" />
 
     <TextView
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:id="@+id/brandView"
         android:layout_marginStart="6dp"
         android:layout_width="wrap_content"
@@ -60,7 +59,6 @@
         tools:text="Brand" />
 
     <TextView
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:id="@+id/categorySubjectView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -70,7 +68,6 @@
         tools:text="Категория:  ываыва ; Предмет: ваыпвап" />
 
     <TextView
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:id="@+id/sizeView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -80,7 +77,6 @@
         tools:text="РАЗМЕР : " />
 
     <TextView
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:id="@+id/wereHouseView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,7 +86,6 @@
         tools:text="Склад - РЕГИОН" />
 
     <TextView
-        style="@style/TextAppearance.Material3.TitleMedium"
         android:id="@+id/costView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -100,7 +95,6 @@
         tools:text="Cумма заказа" />
 
     <TextView
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:id="@+id/totalOrdersToday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,26 +112,35 @@
         android:layout_height="wrap_content">
 
         <TextView
-            style="@style/TextAppearance.Material3.TitleMedium"
             android:id="@+id/yesterdayOrders"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
             style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="3dp" />
+
+        <TextView
             android:id="@+id/sevenDaysOrders"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
             style="@style/TextAppearance.Material3.TitleMedium"
-            android:id="@+id/monthOrders"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="3dp" />
+
+        <TextView
+            android:id="@+id/monthOrders"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="3dp" />
 
         <com.github.mikephil.charting.charts.BarChart
-            android:paddingTop="10dp"
             android:id="@+id/graph"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:layout_margin="5dp"
+            android:paddingTop="10dp" />
     </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

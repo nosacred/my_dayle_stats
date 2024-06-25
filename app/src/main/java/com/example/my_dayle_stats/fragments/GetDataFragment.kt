@@ -1,14 +1,21 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.Networking
+import com.example.my_dayle_stats.Order
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.Sale
+import com.example.my_dayle_stats.Stock
+import com.example.my_dayle_stats.adapters.buttonTimer60sec
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -37,7 +44,7 @@ class GetDataFragment : Fragment() {
 
         val date = LocalDate.now().minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE)
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val apiKey = sharedPref?.getString(getString(R.string.api_key), "No API KEY")
+        val apiKey = sharedPref?.getString(getString(R.string.api_key), null)
 
 
         getallBtn.setOnClickListener {
@@ -52,27 +59,36 @@ class GetDataFragment : Fragment() {
                         Networking.wbApi.searchOrders(date, it1).execute().body()
                     }!!
                 } catch (ex: NullPointerException) {
-                    Toast.makeText(
-                        this@GetDataFragment.context,
-                        "Попробуйте позже",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                   Log.d("429code","at orders")
                 }
 
                 dataModel.ordersVM.postValue(allOrder)
 
-                salesToday = apiKey?.let { it1 ->
-                    Networking.wbApi.searchSales(
-                        date,
-                        it1
-                    ).execute().body()
-                }!!
+                try {
+
+                    salesToday = apiKey?.let { it1 ->
+                        Networking.wbApi.searchSales(
+                            date,
+                            it1
+                        ).execute().body()
+                    }!!
+                }catch (ex: NullPointerException) {
+                    Log.d("429code","at sales")
+                }
                 dataModel.salesVM.postValue(salesToday)
 
-
-                stocksToday =
-                    Networking.wbApi.searchStocks(LocalDate.now().minusDays(10).toString(), apiKey)
-                        .execute().body()!!
+                try {
+                    stocksToday =
+                        apiKey?.let { it1 ->
+                            Networking.wbApi.searchStocks(
+                                LocalDate.now().minusDays(10).toString(),
+                                it1
+                            )
+                                .execute().body()
+                        }!!
+                }catch (ex: NullPointerException) {
+                    Log.d("429code","at stocks")
+                }
                 dataModel.stocksVM.postValue(stocksToday)
 
             }

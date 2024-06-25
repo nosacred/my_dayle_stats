@@ -33,10 +33,16 @@ object articleLink {
             "12"
         } else if (vol != 0 == vol >= 1920 && vol <= 2045) {
             "13"
-        } else {
+        } else if (vol != 0 == vol >= 2046 && vol <= 2189) {
             "14"
+        } else if (vol != 0 == vol >= 2190 && vol <= 2405) {
+            "15"
+        } else if (vol != 0 == vol >= 2406 && vol <= 2641) {
+            "16"
+        } else {
+            "17"
         }
-        val url = "https://basket-$basketNumber.wb.ru/vol$vol/part$part/$itemId/images/big/1.webp"
+        val url = "https://basket-$basketNumber.wbbasket.ru/vol$vol/part$part/$itemId/images/big/1.webp"
         return url
     }
     fun getImgUrl2(itemId: Int): String {
@@ -71,10 +77,16 @@ object articleLink {
             "12"
         } else if (vol != 0 == vol >= 1920 && vol <= 2045) {
             "13"
-        } else {
+        } else if (vol != 0 == vol >= 2046 && vol <= 2189) {
             "14"
+        } else if (vol != 0 == vol >= 2190 && vol <= 2405) {
+            "15"
+        } else if (vol != 0 == vol >= 2406 && vol <= 2641) {
+            "16"
+        } else {
+            "17"
         }
-        val url = "https://basket-$basketNumber.wb.ru/vol$vol/part$part/$itemId/images/big/2.webp"
+        val url = "https://basket-$basketNumber.wbbasket.ru/vol$vol/part$part/$itemId/images/big/2.webp"
         return url
     }
     fun getImgUrl3(itemId: Int): String {
@@ -109,8 +121,14 @@ object articleLink {
             "12"
         } else if (vol != 0 == vol >= 1920 && vol <= 2045) {
             "13"
-        } else {
+        } else if (vol != 0 == vol >= 2046 && vol <= 2189) {
             "14"
+        } else if (vol != 0 == vol >= 2190 && vol <= 2405) {
+            "15"
+        } else if (vol != 0 == vol >= 2406 && vol <= 2641) {
+            "16"
+        } else {
+            "17"
         }
         val url = "https://basket-$basketNumber.wb.ru/vol$vol/part$part/$itemId/images/big/3.webp"
         return url

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/introAPI"
-        android:name="com.example.my_dayle_stats.IntroFragment"
+        android:name="com.example.my_dayle_stats.fragments.IntroFragment"
         android:label="Обновление данных"
         tools:layout="@layout/fragment_info"/>
     <fragment
         android:id="@+id/upDateFragment"
-        android:name="com.example.my_dayle_stats.GetDataFragment"
+        android:name="com.example.my_dayle_stats.fragments.GetDataFragment"
         android:label="Обновление даных"
         tools:layout="@layout/fragment_get_data" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/tabFragment"
-        android:name="com.example.my_dayle_stats.TabFragment"
+        android:name="com.example.my_dayle_stats.fragments.TabFragment"
         android:label="Сегодня"
         tools:layout="@layout/fragment_tab">
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/monthStatsFragment"
-        android:name="com.example.my_dayle_stats.MonthStatsFragment"
+        android:name="com.example.my_dayle_stats.fragments.MonthStatsFragment"
         android:label="Статистика за месяц"
         tools:layout="@layout/fragment_month_stats">
         <action
@@ -40,12 +40,12 @@
     </fragment>
     <fragment
         android:id="@+id/wereHousesFragment"
-        android:name="com.example.my_dayle_stats.ABCFragment"
+        android:name="com.example.my_dayle_stats.fragments.ABCFragment"
         android:label="ABC анализ"
         tools:layout="@layout/fragment_abc" />
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.my_dayle_stats.DetailFragment"
+        android:name="com.example.my_dayle_stats.fragments.DetailFragment"
         android:label="Статистика по арткулу за месяц"
         tools:layout="@layout/fragment_detail"></fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -13,9 +13,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.my_dayle_stats.adapters.AbcAdapter
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.Sale
+import com.example.my_dayle_stats.adapters.getAbcBList
 import java.util.Locale
 
-class abcFragmentA : Fragment() {
+class abcFragmentB : Fragment() {
     lateinit var recycle: RecyclerView
     private val dataModel: DataModel by activityViewModels()
     lateinit var saleList: List<Sale>
@@ -35,7 +40,7 @@ class abcFragmentA : Fragment() {
 
         dataModel.salesVM.observe(activity as LifecycleOwner) {
             saleList = dataModel.salesVM.value.orEmpty()
-            val abcList = getAbcAList(saleList)
+            val abcList = getAbcBList(saleList)
             val sum = abcList.map { it.totalSaleForPay }.sum()
             tv.text = "Выкупили ${abcList.count()} артикулов на ${
                 String.format(
@@ -53,6 +58,6 @@ class abcFragmentA : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() = abcFragmentA()
+        fun newInstance() = abcFragmentB()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.my_dayle_stats
+package com.example.my_dayle_stats.fragments
 
 import android.os.Build
 import android.os.Bundle
@@ -9,7 +9,10 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.example.android_wb.SaleFragment
+import com.example.my_dayle_stats.DataModel
+import com.example.my_dayle_stats.Order
+import com.example.my_dayle_stats.R
+import com.example.my_dayle_stats.VPadapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import java.time.LocalDateTime
@@ -19,10 +22,12 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
     val orderFragment = OrderFragment.newInstance()
     val saleFragment = SaleFragment.newInstance()
     val stockFragment = StockFragment.newInstance()
+    val whFragment = TabWHFragment.newInstance()
     val listfrag = mutableListOf<Fragment>(
         orderFragment,
         saleFragment,
-        stockFragment
+        stockFragment,
+        whFragment
     )
     private val dataModel: DataModel by activityViewModels()
 
@@ -39,12 +44,19 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         tabLayout = view.requireViewById(R.id.tabContainer)
 
-        dataModel.ordersVM.observe(viewLifecycleOwner) {
+        dataModel.ordersVM.observe(viewLifecycleOwner) { it ->
             val bg = tabLayout.getTabAt(0)?.orCreateBadge
             if (bg != null) {
                 bg.number =
                     it.filter { order -> order.date.dayOfYear == LocalDateTime.now().dayOfYear }
                         .count()
+            }
+            val bgWh = tabLayout.getTabAt(3)?.orCreateBadge
+            if (bgWh != null) {
+                bgWh.number =
+                    it.filter { order -> order.date.dayOfYear == LocalDateTime.now().dayOfYear }
+                        .map{order: Order ->  order.warehouseName}.toHashSet().size
+
             }
         }
         dataModel.salesVM.observe(viewLifecycleOwner) {
@@ -91,6 +103,15 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
 
                 2 -> {
                     tab.text = getText(R.string.stocks)
+//                    tab.icon = this.context?.let {
+//                        ContextCompat.getDrawable(
+//                            it,
+//                            R.drawable.ic_stocks
+//                        )
+//                    }
+                }
+                3 -> {
+                    tab.text = "Склады"
 //                    tab.icon = this.context?.let {
 //                        ContextCompat.getDrawable(
 //                            it,
