@@ -1,0 +1,33 @@
+package com.example.my_dayle_stats.dao
+
+object OrderContracts {
+    const val TABLE_NAME = "orders"
+    const val ID = "id"
+    const val WH_NAME = "warehouse_name"
+    const val DATE = "date"
+    const val CHANGE_DATE = "change_date"
+    const val COUNTRY_NAME = "country_name"
+    const val OBLAST_NAME = "oblast_name"
+    const val REGION_NAME = "region_name"
+    const val SUPPLIER_ARTICLE = "supplierArticle"
+    const val NM_ID = "nmId"
+    const val BARCODE = "barcode"
+    const val CATEGORY = "category"
+    const val SUBJECT = "subject"
+    const val BRAND = "brand"
+    const val TECHSIZE = "tech_size"
+    const val INCOME_ID = "income_Id"
+    const val IS_SUPPLY = "is_supply"
+    const val IS_REALIZATION = "is_realization"
+    const val TOTAL_PRICE = "total_price"
+    const val DISCOUNT_PERCENT = "discount_percent"
+    const val SPP = "spp"
+    const val FINISHED_PRICE = "finished_price"
+    const val PRICE_WITH_DISCOUNT = "priceWithDisc"
+    const val IS_CANCEL = "isCancel"
+    const val CANCEL_DATE = "cancelDate"
+    const val ORDER_TYPE = "orderType"
+    const val STICKER = "sticker"
+    const val G_NUMBER = "gNumber"
+
+}

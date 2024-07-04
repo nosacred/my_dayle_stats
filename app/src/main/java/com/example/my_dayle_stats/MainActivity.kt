@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.my_dayle_stats.dao.Database
 import com.example.my_dayle_stats.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.time.LocalDate
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Database.init(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.mainInclude.toolbar)
@@ -44,19 +45,6 @@ class MainActivity : AppCompatActivity() {
 
         val botNav = findViewById<BottomNavigationView>(R.id.btnNavView)
         botNav.setupWithNavController(navController)
-
-
-
-
-
-        var allOrder = emptyList<Order>()
-        var salesToday = emptyList<Sale>()
-        var stocksToday = emptyList<Stock>()
-
-        val date = LocalDate.now().minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE)
-        val apiKey =
-            "eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxNzU3NjE4NSwiaWQiOiIxMDMzNTczNS0wNTViLTQ3NWQtOGQ2OC1mMTA1ZDdkMWFkYTgiLCJpaWQiOjkxNDU0MTMsIm9pZCI6MTM1NTI3LCJzIjozMiwic2lkIjoiZTI2NWVlZmEtYjY1My00OTlkLThmMTYtMjAzYzJmNjMwNGQ1IiwidWlkIjo5MTQ1NDEzfQ.omZjk0y5UhP4lDTeY6CP47acpmQY6cD8QpPZRF7vJ0f1KfYz6JEo7ahEGKfVYF2DIFzqmMcc_Rro5RUrpN1YAw"
-
 
 
     }

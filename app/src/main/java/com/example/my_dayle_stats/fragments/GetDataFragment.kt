@@ -3,10 +3,13 @@ package com.example.my_dayle_stats.fragments
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.my_dayle_stats.DataModel
@@ -37,10 +40,14 @@ class GetDataFragment : Fragment() {
         var salesToday = emptyList<Sale>()
         var stocksToday = emptyList<Stock>()
 
+
         val getallBtn = view.findViewById<Button>(R.id.getAllDataBtn)
         val getOrdersbtn = view.findViewById<Button>(R.id.getOrdersButton)
         val getSalesBtn = view.findViewById<Button>(R.id.getSalesButton)
         val getStocksBtn = view.findViewById<Button>(R.id.getStocksButton)
+
+
+
 
         val date = LocalDate.now().minusDays(30).format(DateTimeFormatter.ISO_LOCAL_DATE)
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
@@ -48,10 +55,13 @@ class GetDataFragment : Fragment() {
 
 
         getallBtn.setOnClickListener {
+
             buttonTimer60sec(getallBtn, getallBtn.text.toString())
             buttonTimer60sec(getOrdersbtn, getOrdersbtn.text.toString())
             buttonTimer60sec(getSalesBtn, getSalesBtn.text.toString())
             buttonTimer60sec(getStocksBtn, getStocksBtn.text.toString())
+
+
 
             GlobalScope.launch {
                 try {
@@ -63,6 +73,7 @@ class GetDataFragment : Fragment() {
                 }
 
                 dataModel.ordersVM.postValue(allOrder)
+
 
                 try {
 
@@ -91,9 +102,11 @@ class GetDataFragment : Fragment() {
                 }
                 dataModel.stocksVM.postValue(stocksToday)
 
+
             }
 
         }
+
 
         getOrdersbtn.setOnClickListener {
             buttonTimer60sec(getOrdersbtn, getOrdersbtn.text.toString())

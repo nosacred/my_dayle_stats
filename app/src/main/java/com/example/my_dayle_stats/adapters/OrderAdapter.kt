@@ -159,7 +159,7 @@ class OrderAdapter(
                 )
             } руб"
 
-            var ldt = ZonedDateTime.now(ZoneId.systemDefault()).minusDays(6)
+            var ldt = ZonedDateTime.now(ZoneId.of("UTC+3")).minusDays(6)
 
 
             val arrayDataPoint = ArrayList<BarEntry>()
